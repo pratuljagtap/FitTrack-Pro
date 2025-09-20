@@ -1,0 +1,61 @@
+{
+  "name": "Exercise",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Exercise name"
+    },
+    "muscle_group": {
+      "type": "string",
+      "enum": [
+        "chest",
+        "back",
+        "shoulders",
+        "arms",
+        "legs",
+        "core",
+        "cardio",
+        "full_body"
+      ],
+      "description": "Primary muscle group targeted"
+    },
+    "equipment": {
+      "type": "string",
+      "enum": [
+        "barbell",
+        "dumbbell",
+        "machine",
+        "cable",
+        "bodyweight",
+        "kettlebell",
+        "resistance_band",
+        "cardio_machine"
+      ],
+      "description": "Equipment needed"
+    },
+    "instructions": {
+      "type": "string",
+      "description": "How to perform the exercise"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "description": "Exercise difficulty level"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Exercise demonstration image"
+    }
+  },
+  "required": [
+    "name",
+    "muscle_group",
+    "equipment",
+    "instructions"
+  ]
+}
