@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Workout, Goal, WorkoutSet } from "../entities/all";
-import { 
-  Calendar,
-  Clock,
-  Target,
-  Zap,
-  TrendingUp
-} from "lucide-react";
+import { Calendar, Clock, Target, Zap, TrendingUp } from "lucide-react";
 
 import StatsCard from "../components/dashboard/StatsCard";
 import RecentWorkouts from "../components/dashboard/RecentWorkouts";
@@ -22,7 +16,7 @@ export default function Dashboard() {
     thisWeekWorkouts: 0,
     totalVolume: 0,
     activeGoals: 0,
-    averageWorkoutTime: 0
+    averageWorkoutTime: 0,
   });
 
   useEffect(() => {
@@ -33,9 +27,9 @@ export default function Dashboard() {
     setIsLoading(true);
     try {
       const [workoutsData, goalsData, setsData] = await Promise.all([
-        Workout.list('-date', 10),
-        Goal.list('-created_date'),
-        WorkoutSet.list('-created_date', 100)
+        Workout.list("-date", 10),
+        Goal.list("-created_date"),
+        WorkoutSet.list("-created_date", 100),
       ]);
 
       setWorkouts(workoutsData);
@@ -45,23 +39,32 @@ export default function Dashboard() {
       // Calculate stats
       const now = new Date();
       const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-      
-      const thisWeekWorkouts = workoutsData.filter(w => new Date(w.date) >= weekAgo);
-      const totalVolume = setsData.reduce((sum, set) => sum + ((set.weight || 0) * (set.reps || 0)), 0);
-      const activeGoals = goalsData.filter(g => g.status === 'active').length;
-      const avgTime = workoutsData.length > 0 
-        ? workoutsData.reduce((sum, w) => sum + (w.duration_minutes || 0), 0) / workoutsData.length
-        : 0;
+
+      const thisWeekWorkouts = workoutsData.filter(
+        (w) => new Date(w.date) >= weekAgo,
+      );
+      const totalVolume = setsData.reduce(
+        (sum, set) => sum + (set.weight || 0) * (set.reps || 0),
+        0,
+      );
+      const activeGoals = goalsData.filter((g) => g.status === "active").length;
+      const avgTime =
+        workoutsData.length > 0
+          ? workoutsData.reduce(
+              (sum, w) => sum + (w.duration_minutes || 0),
+              0,
+            ) / workoutsData.length
+          : 0;
 
       setStats({
         totalWorkouts: workoutsData.length,
         thisWeekWorkouts: thisWeekWorkouts.length,
         totalVolume,
         activeGoals,
-        averageWorkoutTime: Math.round(avgTime)
+        averageWorkoutTime: Math.round(avgTime),
       });
     } catch (error) {
-      console.error('Error loading dashboard data:', error);
+      console.error("Error loading dashboard data:", error);
     }
     setIsLoading(false);
   };
@@ -73,7 +76,9 @@ export default function Dashboard() {
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
             Welcome Back! 💪
           </h1>
-          <p className="text-lg text-gray-600">Ready to crush your fitness goals today?</p>
+          <p className="text-lg text-gray-600">
+            Ready to crush your fitness goals today?
+          </p>
         </div>
 
         {/* Stats Cards */}
@@ -90,7 +95,11 @@ export default function Dashboard() {
             value={stats.thisWeekWorkouts}
             icon={Zap}
             color="bg-green-500"
-            trend={stats.thisWeekWorkouts > 0 ? `${stats.thisWeekWorkouts} sessions` : 'Start your week!'}
+            trend={
+              stats.thisWeekWorkouts > 0
+                ? `${stats.thisWeekWorkouts} sessions`
+                : "Start your week!"
+            }
             delay={0.1}
           />
           <StatsCard
@@ -115,10 +124,10 @@ export default function Dashboard() {
           <div className="lg:col-span-2">
             <RecentWorkouts workouts={workouts} isLoading={isLoading} />
           </div>
-          
+
           <div className="space-y-6">
             <QuickActions />
-            
+
             {stats.averageWorkoutTime > 0 && (
               <div>
                 <StatsCard
