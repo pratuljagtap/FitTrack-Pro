@@ -1,15 +1,14 @@
-import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, Badge, Button } from "../ui";
 import { Calendar, Clock, Zap, ChevronRight } from "lucide-react";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
-import { createPageUrl } from "../../App";
+import { createPageUrl } from "../utils";
 
 const workoutTypeColors = {
   strength: "bg-blue-100 text-blue-800",
   cardio: "bg-red-100 text-red-800",
   flexibility: "bg-purple-100 text-purple-800",
-  mixed: "bg-green-100 text-green-800"
+  mixed: "bg-green-100 text-green-800",
 };
 
 export default function RecentWorkouts({ workouts, isLoading }) {
@@ -38,7 +37,11 @@ export default function RecentWorkouts({ workouts, isLoading }) {
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="text-xl font-bold">Recent Workouts</CardTitle>
         <Link to={createPageUrl("Workouts")}>
-          <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-blue-600 hover:text-blue-700"
+          >
             View All <ChevronRight className="w-4 h-4 ml-1" />
           </Button>
         </Link>
@@ -58,12 +61,14 @@ export default function RecentWorkouts({ workouts, isLoading }) {
                 className="flex items-center justify-between p-4 rounded-xl border hover:bg-gray-50 transition-colors cursor-pointer"
                 style={{
                   animationDelay: `${index * 0.1}s`,
-                  animation: 'fadeInUp 0.5s ease-out forwards'
+                  animation: "fadeInUp 0.5s ease-out forwards",
                 }}
               >
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <h3 className="font-semibold text-gray-900">{workout.name}</h3>
+                    <h3 className="font-semibold text-gray-900">
+                      {workout.name}
+                    </h3>
                     <Badge className={workoutTypeColors[workout.workout_type]}>
                       {workout.workout_type}
                     </Badge>
@@ -71,7 +76,9 @@ export default function RecentWorkouts({ workouts, isLoading }) {
                   <div className="flex items-center gap-4 text-sm text-gray-600">
                     <div className="flex items-center gap-1">
                       <Calendar className="w-4 h-4" />
-                      <span>{format(new Date(workout.date), "MMM d, yyyy")}</span>
+                      <span>
+                        {format(new Date(workout.date), "MMM d, yyyy")}
+                      </span>
                     </div>
                     {workout.duration_minutes && (
                       <div className="flex items-center gap-1">

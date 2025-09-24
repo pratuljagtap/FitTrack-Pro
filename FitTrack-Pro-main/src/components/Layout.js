@@ -1,15 +1,15 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { createPageUrl } from "../App";
-import { 
-  Home, 
-  Dumbbell, 
-  TrendingUp, 
-  BookOpen, 
+import {
+  Home,
+  Dumbbell,
+  TrendingUp,
+  BookOpen,
   Target,
   User,
-  Menu
+  Menu,
 } from "lucide-react";
+import { createPageUrl } from "./utils";
 
 // Simple UI Components (since we don't have shadcn/ui installed)
 const Sidebar = ({ className, children }) => (
@@ -100,17 +100,18 @@ export default function Layout({ children, currentPageName }) {
             }
           `}
         </style>
-        
+
         {/* Mobile Sidebar Overlay */}
         {sidebarOpen && (
-          <div 
+          <div
             className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
             onClick={() => setSidebarOpen(false)}
           />
         )}
-        
-        <Sidebar className={`
-          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
+
+        <Sidebar
+          className={`
+          ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} 
           md:translate-x-0 
           fixed md:static 
           z-50 md:z-auto
@@ -118,7 +119,8 @@ export default function Layout({ children, currentPageName }) {
           border-r border-gray-100 
           shadow-lg 
           transition-transform duration-300 ease-in-out
-        `}>
+        `}
+        >
           <SidebarHeader className="border-b border-gray-100 p-6">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center shadow-lg">
@@ -130,7 +132,7 @@ export default function Layout({ children, currentPageName }) {
               </div>
             </div>
           </SidebarHeader>
-          
+
           <SidebarContent className="p-2 flex-1">
             <div className="space-y-1">
               {navigationItems.map((item) => (
@@ -142,9 +144,10 @@ export default function Layout({ children, currentPageName }) {
                     flex items-center gap-3 px-4 py-3 rounded-lg mb-1
                     hover:bg-blue-50 hover:text-blue-700 
                     transition-all duration-200
-                    ${location.pathname === item.url 
-                      ? 'bg-blue-50 text-blue-700 shadow-sm font-medium' 
-                      : 'text-gray-700 hover:text-blue-700'
+                    ${
+                      location.pathname === item.url
+                        ? "bg-blue-50 text-blue-700 shadow-sm font-medium"
+                        : "text-gray-700 hover:text-blue-700"
                     }
                   `}
                 >
@@ -161,8 +164,12 @@ export default function Layout({ children, currentPageName }) {
                 <User className="w-5 h-5 text-gray-600" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-medium text-gray-900 text-sm truncate">Athlete</p>
-                <p className="text-xs text-gray-500 truncate">Keep pushing limits!</p>
+                <p className="font-medium text-gray-900 text-sm truncate">
+                  Athlete
+                </p>
+                <p className="text-xs text-gray-500 truncate">
+                  Keep pushing limits!
+                </p>
               </div>
             </div>
           </SidebarFooter>
@@ -171,17 +178,17 @@ export default function Layout({ children, currentPageName }) {
         <main className="flex-1 flex flex-col bg-gray-50 md:ml-0">
           <header className="bg-white border-b border-gray-100 px-6 py-4 md:hidden shadow-sm">
             <div className="flex items-center gap-4">
-              <SidebarTrigger 
+              <SidebarTrigger
                 className="hover:bg-gray-100 p-2 rounded-lg transition-colors duration-200"
                 onClick={() => setSidebarOpen(!sidebarOpen)}
               />
-              <h1 className="text-xl font-bold gradient-bg bg-clip-text text-transparent">FitTracker</h1>
+              <h1 className="text-xl font-bold gradient-bg bg-clip-text text-transparent">
+                FitTracker
+              </h1>
             </div>
           </header>
 
-          <div className="flex-1 overflow-auto">
-            {children}
-          </div>
+          <div className="flex-1 overflow-auto">{children}</div>
         </main>
       </div>
     </SidebarProvider>
