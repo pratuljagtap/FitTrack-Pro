@@ -1,5 +1,3 @@
-Absolutely! Here’s a clean, well-explained, step-by-step guide you can follow — whether you’re setting this up yourself or sharing it with a teammate or client.
-
 ---
 
 # 🏋️‍♂️ Fitness Tracker — Setup & Installation Guide
