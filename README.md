@@ -126,8 +126,4 @@ Your browser should automatically open `http://localhost:3000`.
 
 You now have a fully functional, modern React fitness tracking app — ready for customization, extension, or deployment.
 
-Happy coding — and happy gains! 💪📈
-
 ---
-
-Let me know if you’d like this as a downloadable `README.md` file or need deployment instructions next!
